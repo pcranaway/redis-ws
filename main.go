@@ -60,6 +60,9 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
     flag.Parse()
 
+    // fix weird error 
+    upgrader.CheckOrigin = func(r *http.Request) bool { return true }
+
     // connect to redis
     rdb = redis.NewClient(&redis.Options{
         Addr: *redis_host,
